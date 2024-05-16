@@ -3,12 +3,19 @@ package com.planealo.negocio.customers.service.impl;
 import java.util.List;
 
 import com.planealo.negocio.customers.models.entity.Customer;
+import com.planealo.negocio.customers.repository.CustomerRepository;
 import com.planealo.negocio.customers.service.IService;
 
 public class CustomerServiceImpl implements IService<Customer, Long> {
 
+	private final CustomerRepository customerRepo;
 	
 	
+	public CustomerServiceImpl(CustomerRepository customerRepo) {
+		super();
+		this.customerRepo = customerRepo;
+	}
+
 	@Override
 	public Customer add(Customer t) {
 		// TODO Auto-generated method stub
