@@ -36,10 +36,6 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.planealo.negocio</groupId>
-			<artifactId>negocio</artifactId>
-			<version>0.0.1</version>
-		</dependency>
+		
 	</dependencies>
 </project>
