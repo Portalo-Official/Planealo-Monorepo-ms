@@ -2,10 +2,13 @@ package com.planealo.negocio.customers.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.planealo.negocio.customers.models.entity.Customer;
 import com.planealo.negocio.customers.repository.CustomerRepository;
 import com.planealo.negocio.customers.service.IService;
 
+@Service
 public class CustomerServiceImpl implements IService<Customer, Long> {
 
 	private final CustomerRepository customerRepo;
