@@ -97,5 +97,6 @@
 
 	<modules>
 		<module>Customers</module>
+		<module>Plan</module>
 	</modules>
 </project>
