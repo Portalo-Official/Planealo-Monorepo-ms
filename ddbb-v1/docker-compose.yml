@@ -63,6 +63,7 @@ services:
 volumes:
   usuarios-data:
   plan-data:
+  items-data:
   invitaciones-data:
   pgadmin-data:
     driver: local

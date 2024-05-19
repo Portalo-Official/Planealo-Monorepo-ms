@@ -6,7 +6,7 @@ CREATE TABLE planes (
     ubicacion_latitud DOUBLE PRECISION,
     ubicacion_longitud DOUBLE PRECISION,
     descripcion TEXT,
-    modo VARCHAR(50) CHECK (modo IN ('privada', 'publica')),  -- Restricción para asegurarme de introducir estos valores válidos
+    modo VARCHAR(50) CHECK (modo IN ('privada', 'publica'))  -- Restricción para asegurarme de introducir estos valores válidos
 );
 
 --  Tabla de roles
