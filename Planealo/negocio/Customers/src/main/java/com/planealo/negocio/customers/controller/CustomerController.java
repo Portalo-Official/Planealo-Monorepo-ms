@@ -50,9 +50,9 @@ public class CustomerController {
 		return null;
 	}
 	
-	 @PutMapping("/{ref}")
-    public ResponseEntity<CustomerDTOperfil> updateCustomer(@PathVariable String ref, @RequestBody CustomerDTOperfil customerUpdate) {
-        Customer customer = customerService.editUser(ref, this.customerMapper.perfilToCustomer(customerUpdate));
+	 @PutMapping()
+    public ResponseEntity<CustomerDTOperfil> updateCustomer( @RequestBody CustomerDTOperfil customerUpdate) {
+        Customer customer = customerService.editUser( this.customerMapper.perfilToCustomer(customerUpdate));
         if (customer != null) {
             return ResponseEntity.ok(this.customerMapper.toDTOperfil(customer));
         } else {
@@ -63,9 +63,12 @@ public class CustomerController {
 	 public ResponseEntity<?> createCustomer(@RequestBody CustomerDTOperfil customerUpdate) {
 		 Customer customer = customerService.add( this.customerMapper.perfilToCustomer(customerUpdate));
 		 if (customer != null) {
-			 return ResponseEntity.ok().header("New Customer", HttpHeaders.ACCEPT).body(this.customerMapper.toDTOperfil(customer));
+			 return ResponseEntity.ok()
+					 .header("New Customer", HttpHeaders.ACCEPT)
+					 .body(this.customerMapper.toDTOperfil(customer));
 		 } else {
-			 return ResponseEntity.badRequest().body("Campos invalidados"); //TODO Hardcodeo
+			 return ResponseEntity.badRequest()
+					 .body("Campos invalidados"); //TODO Hardcodeo
 		 }
 	 }
 	 
@@ -75,7 +78,9 @@ public class CustomerController {
         if (isDelete) {
             return ResponseEntity.ok(customerDelete);
         } else {
-            return ResponseEntity.badRequest().header("Delete Customer", HttpHeaders.WARNING).body("Problemas al borrar el usuario");
+            return ResponseEntity.badRequest()
+            		.header("Delete Customer", HttpHeaders.WARNING)
+            		.body("Problemas al borrar el usuario");
         }
 	 }
 	
