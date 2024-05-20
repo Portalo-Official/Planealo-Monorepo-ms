@@ -6,15 +6,15 @@ public interface IService<T, Ref> {
 
 	public T add(T t);
 	
-	public boolean delete(Ref ref);
+	public Boolean delete(T t);
 	
 	public T getByRef(Ref ref);
 	
 	public List<T> getAll();
 	
-	public boolean addAll(List<T> t);
+	public Boolean addAll(List<T> t);
 	
-	public T editUser(Ref ref, T t);
+	public T editUser( T t);
 	
 	
 }
