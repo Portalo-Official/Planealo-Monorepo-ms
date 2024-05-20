@@ -3,9 +3,12 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +42,7 @@ public class CustomerController {
 													.collect(Collectors.toList()));
 	}
 	
-	@GetMapping("byRef/{ref}")
+	@GetMapping("/{ref}")
 	public ResponseEntity<?> findByReferencia(@PathVariable String ref){
 		
 //		this.customerService.
@@ -56,6 +59,25 @@ public class CustomerController {
             return ResponseEntity.notFound().build();
         }
     }
+	 @PostMapping("new")
+	 public ResponseEntity<?> createCustomer(@RequestBody CustomerDTOperfil customerUpdate) {
+		 Customer customer = customerService.add( this.customerMapper.perfilToCustomer(customerUpdate));
+		 if (customer != null) {
+			 return ResponseEntity.ok().header("New Customer", HttpHeaders.ACCEPT).body(this.customerMapper.toDTOperfil(customer));
+		 } else {
+			 return ResponseEntity.badRequest().body("Campos invalidados"); //TODO Hardcodeo
+		 }
+	 }
+	 
+	 @DeleteMapping()
+	 public ResponseEntity<?> delete(@RequestBody CustomerDTOperfil customerDelete){
+		 Boolean isDelete = customerService.delete( this.customerMapper.perfilToCustomer(customerDelete));
+        if (isDelete) {
+            return ResponseEntity.ok(customerDelete);
+        } else {
+            return ResponseEntity.badRequest().header("Delete Customer", HttpHeaders.WARNING).body("Problemas al borrar el usuario");
+        }
+	 }
 	
 	
 }
