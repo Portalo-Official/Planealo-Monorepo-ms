@@ -49,7 +49,8 @@ class CustomerMapperTest {
 		assertEquals(customer.getPassword(), customerDTO.pass());
 		assertNotNull(customer.getFechaCreacion());
 		assertNotNull(customer.getFechaUltimaActualizacion());
-		assertNotNull(customer.getUltimoInicioSesion());
-		
+		assertNotNull(customer.getUltimoInicioSesion());	
 	}
+	
+	
 }

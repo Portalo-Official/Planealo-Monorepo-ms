@@ -38,14 +38,14 @@ public class Customer {
 	@Column(name = "contrasena", nullable = false, length = 255)
 	private String password;
 	
-	@Transient //TODO No implement into ddbb
+	@Column(name = "fecha_creacion")
 	private LocalDateTime fechaCreacion;
 
-	@Transient //TODO No implement into ddbb
+	@Column(name = "fecha_ultima_actualizacion")
 	private LocalDateTime fechaUltimaActualizacion;
 	
-	@Transient //TODO No implement into ddbb
-	private LocalDateTime ultimeInicioSesion;
+	@Column(name = "ultimo_inicio_sesion")
+	private LocalDateTime ultimoInicioSesion;
 	
 	
 	public Customer(String nombre, String referencia, String email, String password) {

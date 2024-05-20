@@ -27,9 +27,10 @@ public interface CustomerMapper {
 		@Mapping(source ="ref", target = "referencia")
 		@Mapping(target ="fechaCreacion", ignore = true) 
 	    @Mapping(target ="fechaUltimaActualizacion", ignore = true)
-	    @Mapping(target ="ultimeInicioSesion", ignore = true)
+	    @Mapping(target ="ultimoInicioSesion", ignore = true)
 		Customer usuarioDTOToUsuario(CustomerDTO usuarioDTO);
-
+		
+		// TODO issue -> No setea fechas despues de mapear.
 		/**
 		 * Metodo que ejecuta despues mapear un dto a usuario. 
 		 * Si se crea es solo en el caso de que se guarde por ahora.
@@ -39,6 +40,6 @@ public interface CustomerMapper {
 	    default void setFechas(@MappingTarget Customer usuario) {
 	        usuario.setFechaCreacion(LocalDateTime.now());
 	        usuario.setFechaUltimaActualizacion(LocalDateTime.now());
-	        usuario.setUltimeInicioSesion(LocalDateTime.now());
+	        usuario.setUltimoInicioSesion(LocalDateTime.now());
 	    }
 }
