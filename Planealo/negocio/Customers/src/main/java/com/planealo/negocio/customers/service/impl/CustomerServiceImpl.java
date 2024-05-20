@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.planealo.negocio.customers.models.entity.Customer;
 import com.planealo.negocio.customers.repository.CustomerRepository;
