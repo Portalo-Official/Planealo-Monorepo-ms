@@ -68,16 +68,25 @@
 								<version>${org.mapstruct.version}</version>
 							</path>
 							<!-- Si usas Lombok esto hace falta para detectar
-							Setter y Getters...-->
+							su codigo generado...-->
 							<path>
 								<groupId>org.projectlombok</groupId>
 								<artifactId>lombok</artifactId>
 								<version>${lombok.version}</version>
 							</path>
+							<!-- Para bindear, ya que puede compilar antes el Mapper que el codigo lombok-->
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok-mapstruct-binding</artifactId>
+								<version>0.2.0</version>
+							</path>
+
+
 						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
-				<!-- Duda: No se si al estar implementaod este plugin en el padre, hace caso a este..-->
+				<!-- Duda: No se si al estar implementaod este plugin en el
+				padre, hace caso a este..-->
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
