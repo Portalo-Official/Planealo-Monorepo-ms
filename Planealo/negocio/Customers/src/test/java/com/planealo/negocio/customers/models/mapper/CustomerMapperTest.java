@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.planealo.negocio.customers.models.dto.CustomerDTO;
+import com.planealo.negocio.customers.models.dto.CustomerDTOperfil;
 import com.planealo.negocio.customers.models.entity.Customer;
 
 @SpringBootTest
@@ -21,7 +21,7 @@ class CustomerMapperTest {
 		
 		Customer customer = Customer.builder().id(1L).email("sample@gmail.com").nombre("peter").referencia("#1231-0F").build();
 		
-		CustomerDTO customerDTO =  this.customerMaper.usuarioToUsuarioDTO(customer);
+		CustomerDTOperfil customerDTO =  this.customerMaper.toDTOperfil(customer);
 		
 		assertNotNull(customerDTO);
 		
@@ -34,14 +34,14 @@ class CustomerMapperTest {
 	@Test
 	void DTOtoEntity() {
 		
-		 CustomerDTO customerDTO = new CustomerDTO(
+		 CustomerDTOperfil customerDTO = new CustomerDTOperfil(
 		            "ref123",         // ref
 		            "Juan Perez",     // nombre
 		            "juan.perez@example.com", // email
 		            "password123"     // pass
 		        );
 		
-		Customer customer= this.customerMaper.usuarioDTOToUsuario(customerDTO);
+		Customer customer= this.customerMaper.perfilToCustomer(customerDTO);
 		
 		assertEquals( customerDTO.nombre(), customer.getNombre());
 		assertEquals( customerDTO.email(), customer.getEmail());
