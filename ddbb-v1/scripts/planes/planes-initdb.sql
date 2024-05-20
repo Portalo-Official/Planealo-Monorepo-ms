@@ -1,8 +1,9 @@
 -- Tabla de planes
 CREATE TABLE planes (
     id BIGSERIAL PRIMARY KEY,
+    referencia VARCHAR(150) NOT NULL UNIQUE,
     fecha_creacion TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    fecha_fin TIMESTAMP WITHOUT TIME ZONE,
+    fecha_fin TIMESTAMP WITHOUT TIME ZONE NULL,
     ubicacion_latitud DOUBLE PRECISION,
     ubicacion_longitud DOUBLE PRECISION,
     descripcion TEXT,
