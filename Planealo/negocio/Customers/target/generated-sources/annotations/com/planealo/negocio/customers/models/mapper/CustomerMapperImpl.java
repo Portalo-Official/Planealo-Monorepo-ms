@@ -1,20 +1,38 @@
 package com.planealo.negocio.customers.models.mapper;
 
-import com.planealo.negocio.customers.models.dto.CustomerDTO;
+import com.planealo.negocio.customers.models.dto.CustomerDTOlogin;
+import com.planealo.negocio.customers.models.dto.CustomerDTOperfil;
+import com.planealo.negocio.customers.models.dto.CustomerDTOresumen;
 import com.planealo.negocio.customers.models.entity.Customer;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-20T01:08:44+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.38.0.v20240417-1011, environment: Java 17.0.10 (Eclipse Adoptium)"
+    date = "2024-05-20T12:41:27+0200",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.37.0.v20240215-1558, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class CustomerMapperImpl implements CustomerMapper {
 
     @Override
-    public CustomerDTO usuarioToUsuarioDTO(Customer usuario) {
+    public Customer perfilToCustomer(CustomerDTOperfil usuarioDTO) {
+        if ( usuarioDTO == null ) {
+            return null;
+        }
+
+        Customer.CustomerBuilder customer = Customer.builder();
+
+        customer.password( usuarioDTO.pass() );
+        customer.referencia( usuarioDTO.ref() );
+        customer.email( usuarioDTO.email() );
+        customer.nombre( usuarioDTO.nombre() );
+
+        return customer.build();
+    }
+
+    @Override
+    public CustomerDTOperfil toDTOperfil(Customer usuario) {
         if ( usuario == null ) {
             return null;
         }
@@ -29,13 +47,44 @@ public class CustomerMapperImpl implements CustomerMapper {
 
         String pass = null;
 
-        CustomerDTO customerDTO = new CustomerDTO( ref, nombre, email, pass );
+        CustomerDTOperfil customerDTOperfil = new CustomerDTOperfil( ref, nombre, email, pass );
 
-        return customerDTO;
+        return customerDTOperfil;
     }
 
     @Override
-    public Customer usuarioDTOToUsuario(CustomerDTO usuarioDTO) {
+    public Customer resumenToCustomer(CustomerDTOresumen usuarioDTO) {
+        if ( usuarioDTO == null ) {
+            return null;
+        }
+
+        Customer.CustomerBuilder customer = Customer.builder();
+
+        customer.referencia( usuarioDTO.ref() );
+        customer.nombre( usuarioDTO.nombre() );
+
+        return customer.build();
+    }
+
+    @Override
+    public CustomerDTOresumen toDTOresumen(Customer usuario) {
+        if ( usuario == null ) {
+            return null;
+        }
+
+        String ref = null;
+        String nombre = null;
+
+        ref = usuario.getReferencia();
+        nombre = usuario.getNombre();
+
+        CustomerDTOresumen customerDTOresumen = new CustomerDTOresumen( ref, nombre );
+
+        return customerDTOresumen;
+    }
+
+    @Override
+    public Customer loginToCustomer(CustomerDTOlogin usuarioDTO) {
         if ( usuarioDTO == null ) {
             return null;
         }
@@ -43,10 +92,24 @@ public class CustomerMapperImpl implements CustomerMapper {
         Customer.CustomerBuilder customer = Customer.builder();
 
         customer.password( usuarioDTO.pass() );
-        customer.referencia( usuarioDTO.ref() );
-        customer.email( usuarioDTO.email() );
-        customer.nombre( usuarioDTO.nombre() );
 
         return customer.build();
+    }
+
+    @Override
+    public CustomerDTOlogin toDTOlogin(Customer usuario) {
+        if ( usuario == null ) {
+            return null;
+        }
+
+        String email = null;
+
+        email = usuario.getEmail();
+
+        String pass = null;
+
+        CustomerDTOlogin customerDTOlogin = new CustomerDTOlogin( email, pass );
+
+        return customerDTOlogin;
     }
 }
