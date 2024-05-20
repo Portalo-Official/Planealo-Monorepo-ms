@@ -18,7 +18,7 @@ import com.planealo.negocio.customers.models.entity.Customer;
 public interface CustomerMapper {
 	// No se ya si esto es estar mas limpio o sucio con el lenguje de alto nivel...
 	
-	// 				##### DTOperfil #####
+	// 	################### DTOperfil ########################################
 	
 	@Mapping(target = "id", ignore = true) // Ignorar mapeo
 	@Mapping(source = "pass", target = "password")
@@ -32,7 +32,7 @@ public interface CustomerMapper {
 	@Mapping(target = "pass", ignore = true)
 	CustomerDTOperfil toDTOperfil(Customer usuario);
 
-	//		##### DTOresumen #####
+	//	#################### DTOresumen #######################################
 	
 	@Mapping(target = "id", ignore = true) 
 	@Mapping(target = "password", ignore = true) 
@@ -46,7 +46,7 @@ public interface CustomerMapper {
 	@InheritInverseConfiguration
 	CustomerDTOresumen toDTOresumen(Customer usuario);
 	
-	//	##### DTOlogin #####
+	//	################### DTOlogin ###########################################
 	 	
 	@Mapping(target = "id", ignore = true) 
 	@Mapping(target = "nombre", ignore = true) 
