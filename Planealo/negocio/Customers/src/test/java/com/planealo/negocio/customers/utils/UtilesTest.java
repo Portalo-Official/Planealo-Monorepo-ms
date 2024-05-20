@@ -18,10 +18,10 @@ class UtilesTest {
 		for (int i = 0; i < 25; i++) {
 			referencias.add(Utiles.generateReferencia());
 		}
-//		referencias.forEach(r-> System.out.println(r));
+		referencias.forEach(r-> System.out.println(r));
 		
 		// comprobamos el formato
-		 String regex = "^#[0-9A-F]{6}-[0-9A-F]{2}$";
+		 String regex = "^[MTWFS][0-9A-F]{6}-[0-9A-F]{2}$";
 	       
 		for (String referencia : referencias) {
 			assertTrue(referencia.matches(regex));
