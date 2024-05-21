@@ -12,6 +12,6 @@ public interface IServiceCRUD<T, Ref> {
 
 	List<T> getAll();
 
-	T update(Ref ref, T entity);
+	T update( T entity);
 
 }

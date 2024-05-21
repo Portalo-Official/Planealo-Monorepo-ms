@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @Entity
 @Table(name = "planes")
+
 public class Plan {
 
     @Id
@@ -49,8 +50,8 @@ public class Plan {
     @Column(name = "ubicacion_latitud")
     private Double ubicacionLatitud;
 
-    @Column(name = "ubicacion_longitud")
-    private Double ubicacionLongitud;
+    @Column(name = "ubicacion_longitud") // TODO cambiar esto en la DDBB....
+    private Double ubicacionAltitud;
 
     @Column( columnDefinition = "TEXT")
     private String descripcion;
