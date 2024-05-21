@@ -13,7 +13,7 @@ CREATE TABLE planes (
 --  Tabla de roles
 CREATE TABLE rol (
     id BIGSERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL  CHECK (modo IN ('administrador', 'invitado', 'propietario')) 
+    nombre VARCHAR(50) NOT NULL  CHECK (nombre IN ('administrador', 'invitado', 'propietario')) 
 );
 
 -- Tabla de miembros del plan
