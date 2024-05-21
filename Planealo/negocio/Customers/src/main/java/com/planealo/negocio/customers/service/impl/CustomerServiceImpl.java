@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.planealo.negocio.customers.models.entity.Customer;
 import com.planealo.negocio.customers.repository.CustomerRepository;
 import com.planealo.negocio.customers.service.ICustomerService;
+import com.planealo.negocio.customers.utils.Utiles;
 
 @Service
 public class CustomerServiceImpl implements ICustomerService<Customer, String> {
@@ -23,7 +24,8 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 
 	@Override
 	public Customer add(Customer t) {
-		return this.customerRepo.save(null);
+		t.setReferencia(Utiles.generateReferencia());
+		return this.customerRepo.save(t);
 	}
 
 	@Override
