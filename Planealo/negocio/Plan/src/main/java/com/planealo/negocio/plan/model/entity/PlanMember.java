@@ -28,14 +28,10 @@ public class PlanMember {
 	
 	// Para claves primarias embebidas 
 	// https://stackoverflow.com/questions/9923643/can-someone-please-explain-me-mapsid-in-hibernate
-	@MapsId("planId") // Elemto de la clave compuesta PlanMiembroId
 	@ManyToOne
-	@JoinColumn(name = "plan_id")
+	@MapsId("planReferencia") // Elemento de la clave compuesta PlanMiembroId
+	@JoinColumn(name = "plan_referencia", referencedColumnName = "referencia")
 	private Plan plan;
-
-	@Column(name = "usuario_ref", length = 150, nullable = false, insertable = false, updatable = false)
-	private String usuarioRef;
-
 
 	@ManyToOne
 	@JoinColumn(name = "rol_id") 
@@ -45,7 +41,9 @@ public class PlanMember {
 	@Data
 	@AllArgsConstructor
 	public class PlanMiembroId implements Serializable {
-	    private Long planId;
+		@Column(name= "plan_referencia")
+	    private String planReferencia;
+		@Column(name= "usuario_ref")
 	    private String usuarioRef;
 	}
 }

@@ -2,6 +2,7 @@ package com.planealo.negocio.plan.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,11 +16,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
 @NoArgsConstructor
@@ -32,10 +35,10 @@ public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "referencia_propietario", nullable = false)
-    private Integer referenciaPropietario;
-
+    
+    @Column( unique = true, nullable = false, updatable = false, length = 150)
+    private String referencia;
+    
     @CreationTimestamp
     @Column(name = "fecha_creacion", nullable = false, updatable = false)
     private LocalDateTime fechaCreacion;
@@ -49,10 +52,10 @@ public class Plan {
     @Column(name = "ubicacion_longitud")
     private Double ubicacionLongitud;
 
-    @Column(name = "descripcion", columnDefinition = "TEXT")
+    @Column( columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(name = "modo", nullable = false, length = 50)
+    @Column( nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
     private Modo modo;
 
@@ -69,7 +72,15 @@ public class Plan {
     	
     }
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name ="plan_id") // Probar con la tonteria de clave compuesta en PlanMemberId que esto FUNCA!!
+    //@JoinColumn(name ="plan_id") 
+    //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PlanMember> miembros;
+    
+    @PrePersist
+    protected void prePersist() {
+        this.referencia = UUID.randomUUID().toString();
+       
+    }
+    
 }
