@@ -1,6 +1,7 @@
 package com.planealo.negocio.plan.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,38 +21,47 @@ public class PlanServiceImpl implements IPlanService<Plan, String>{
 
 	@Override
 	public Plan add(Plan entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.planRepository.save(entity);
 	}
 
 	@Override
 	public boolean delete(String ref) {
-		// TODO Auto-generated method stub
+		Optional<Plan> planMemberOpt = this.planRepository.findByReferencia(ref);
+		if(planMemberOpt.isPresent()) {
+			this.planRepository.delete(planMemberOpt.get());
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Plan getByRef(String ref) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.planRepository.findByReferencia(ref).orElse(null);
 	}
 
 	@Override
 	public List<Plan> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.planRepository.findAll();
 	}
 
 	@Override
-	public Plan update(String ref, Plan entity) {
-		// TODO Auto-generated method stub
+	public Plan update( Plan entity) {
+		Optional<Plan> planOpt = this.planRepository.findByReferencia(entity.getReferencia());
+		if(planOpt.isPresent()) {
+			Plan plan= planOpt.get();
+			plan.setDescripcion(entity.getDescripcion());
+			plan.setFechaFin(entity.getFechaFin());
+			plan.setModo(entity.getModo());
+			plan.setUbicacionLatitud(entity.getUbicacionLatitud());
+			plan.setUbicacionAltitud(entity.getUbicacionAltitud());
+			return plan;
+		}
 		return null;
 	}
 
 	@Override
 	public Plan findByReferencia(String ref) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.planRepository.findByReferencia(ref).orElse(null);
 	}
 	
 	
