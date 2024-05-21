@@ -59,8 +59,8 @@ public class Plan {
     @Enumerated(EnumType.STRING)
     private Modo modo;
 
-    @Column(name = "ciudad", length = 255)
-    private String ciudad;
+//    @Column(name = "ciudad", length = 255)
+//    private String ciudad;
 
     /* Lo he visto en practicas y por internet pero no se si me gusta aqui
      * Lo dejo porque considero que el enum tiene la sohesion necesario para 
