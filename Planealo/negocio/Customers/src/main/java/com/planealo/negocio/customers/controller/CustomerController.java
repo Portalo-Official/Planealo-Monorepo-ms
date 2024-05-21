@@ -21,7 +21,7 @@ import com.planealo.negocio.customers.models.mapper.CustomerMapper;
 import com.planealo.negocio.customers.service.impl.CustomerServiceImpl;
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("customers")
 public class CustomerController {
 
 	private final CustomerServiceImpl customerService;
