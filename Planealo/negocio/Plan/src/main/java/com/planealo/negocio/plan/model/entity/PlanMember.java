@@ -40,7 +40,9 @@ public class PlanMember {
 	@Embeddable // @@Embeddable -> https://www.baeldung.com/jpa-composite-primary-keys
 	@Data
 	@AllArgsConstructor
-	public class PlanMiembroId implements Serializable {
+	@NoArgsConstructor
+	@Builder
+	public static class PlanMiembroId implements Serializable {
 		@Column(name= "plan_referencia")
 	    private String planReferencia;
 		@Column(name= "usuario_ref")
