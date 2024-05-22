@@ -9,6 +9,8 @@ import com.planealo.negocio.plan.model.entity.Plan;
 import com.planealo.negocio.plan.repository.PlanRepository;
 import com.planealo.negocio.plan.service.IPlanService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PlanServiceImpl implements IPlanService<Plan, String>{
 

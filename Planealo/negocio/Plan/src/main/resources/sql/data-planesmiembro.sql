@@ -1,8 +1,8 @@
 -- Inserción de roles
-INSERT INTO rol (nombre) VALUES ('administrador'), ('invitado'), ('propietario');
+INSERT INTO rol (nombre) VALUES ('ADMINISTRADOR'), ('INVITADO'), ('PROPIETARIO');
 
 -- Inserción de planes
-INSERT INTO planes (referencia, fecha_creacion, fecha_fin, ubicacion_latitud, ubicacion_longitud, descripcion, modo) VALUES
+INSERT INTO planes (referencia, fecha_creacion, fecha_fin, ubicacion_latitud, ubicacion_altitud, descripcion, modo) VALUES
 ('5c2064da-bf6c', CURRENT_TIMESTAMP, NULL, 40.416775, -3.703790, 'Excursión al campo en Madrid', 'PUBLICA'),
 ('7d3b6b6e-9d1f', CURRENT_TIMESTAMP, NULL, 41.382894, 2.177432, 'Reunión de amigos en Barcelona', 'PRIVADA'),
 ('8a1f3c9d-4f6e', CURRENT_TIMESTAMP, NULL, 37.389092, -5.984459, 'Fiesta sorpresa en Sevilla', 'PUBLICA'),
@@ -45,3 +45,4 @@ INSERT INTO plan_miembros (plan_referencia, usuario_ref, rol_id) VALUES
 
 ('8b2c5d4e-7a1f', 'MA1B2C3-19', 3), -- Propietario
 ('8b2c5d4e-7a1f', 'T2D3E4F-20', 2);
+

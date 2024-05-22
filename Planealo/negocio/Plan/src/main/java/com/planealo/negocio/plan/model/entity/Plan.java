@@ -50,7 +50,7 @@ public class Plan {
     @Column(name = "ubicacion_latitud")
     private Double ubicacionLatitud;
 
-    @Column(name = "ubicacion_longitud") // TODO cambiar esto en la DDBB....
+    @Column(name = "ubicacion_altitud") 
     private Double ubicacionAltitud;
 
     @Column( columnDefinition = "TEXT")
@@ -75,6 +75,7 @@ public class Plan {
     
     //@JoinColumn(name ="plan_id") 
     //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "plan", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PlanMember> miembros;
     

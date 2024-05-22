@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS plan_miembros CASCADE;
+DROP TABLE IF EXISTS planes CASCADE;
+DROP TABLE IF EXISTS rol CASCADE;
 -- Tabla de planes
 CREATE TABLE planes (
     id BIGSERIAL PRIMARY KEY,
@@ -13,7 +16,7 @@ CREATE TABLE planes (
 --  Tabla de roles
 CREATE TABLE rol (
     id BIGSERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL  CHECK (nombre IN ('administrador', 'invitado', 'propietario')) 
+    nombre VARCHAR(50) NOT NULL  CHECK (nombre IN ('ADMINISTRADOR', 'INVITADO', 'PROPIETARIO')) 
 );
 
 -- Tabla de miembros del plan
