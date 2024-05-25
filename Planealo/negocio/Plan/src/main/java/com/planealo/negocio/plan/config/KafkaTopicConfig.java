@@ -24,7 +24,7 @@ public class KafkaTopicConfig {
 	 *  y asegurar la disponibilidad de los datos.
 	 */
 	@Bean
-	public NewTopic generateTopi() {
+	public NewTopic generateTopic() {
 		
 		Map<String, String> configuracion = new HashMap<>();
 		// 1) Tratamiento de borrado de los mensajes
@@ -36,7 +36,7 @@ public class KafkaTopicConfig {
 		// 4) Tamanio Max de cada mensaje
 		configuracion.put(TopicConfig.MAX_MESSAGE_BYTES_CONFIG, ConstTopics.TRES_MB);
 		
-		return TopicBuilder.name(ConstTopics.Topic_Planes)
+		return TopicBuilder.name(ConstTopics.Topic_Usuario)
 					.partitions(2) // Num particiones
 					.replicas(2) // Num replicas
 					.configs(configuracion)

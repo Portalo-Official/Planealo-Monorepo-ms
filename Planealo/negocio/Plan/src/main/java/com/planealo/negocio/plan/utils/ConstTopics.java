@@ -2,7 +2,9 @@ package com.planealo.negocio.plan.utils;
 
 public class ConstTopics {
 	
-	public static final String Topic_Planes     = "Planes";
+	public static final String Topic_Usuario     = "usuario-obtener";
+	
+	public static final String Topic_Planes     = "planes";
 	
 	public static final String DIA_MILISEGUNDOS = "86400000";
 	
