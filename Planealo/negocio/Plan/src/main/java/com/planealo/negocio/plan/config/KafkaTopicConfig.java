@@ -37,8 +37,8 @@ public class KafkaTopicConfig {
 		configuracion.put(TopicConfig.MAX_MESSAGE_BYTES_CONFIG, ConstTopics.TRES_MB);
 		
 		return TopicBuilder.name(ConstTopics.Topic_Usuario)
-					.partitions(2) // Num particiones
-					.replicas(2) // Num replicas
+					.partitions(1) // Num particiones
+					.replicas(1) // Num replicas
 					.configs(configuracion)
 					.build();
 	}
