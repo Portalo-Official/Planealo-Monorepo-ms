@@ -47,6 +47,9 @@ public class KafkaProviderConfig {
 		return new DefaultKafkaProducerFactory<>(providerConfig());
 	}
 	
+	/*
+	 * KafkaTemplate es la clase que nos permite publicar mensajes hacia el bus de mensajes.
+	 */
 	@Bean
 	public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producerFactory){
 		return new KafkaTemplate<>(producerFactory);
