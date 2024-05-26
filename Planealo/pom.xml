@@ -24,6 +24,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<spring-boot.version>3.2.5</spring-boot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-cloud.version>2023.0.1</spring-cloud.version>
 		<!-- <postgres.version>42.5.0</postgres.version> -->
 		<!-- <java-validation.version>2.0.1.Final</java-validation.version> -->
 	</properties>
@@ -38,6 +39,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -48,6 +56,11 @@
 			 <version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
