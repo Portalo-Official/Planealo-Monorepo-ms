@@ -2,18 +2,19 @@
 CREATE TABLE planes (
     id BIGSERIAL PRIMARY KEY,
     referencia VARCHAR(150) NOT NULL UNIQUE,
+    titulo VARCHAR(150) NOT NULL,
     fecha_creacion TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     fecha_fin TIMESTAMP WITHOUT TIME ZONE NULL,
     ubicacion_latitud DOUBLE PRECISION,
     ubicacion_altitud DOUBLE PRECISION,
     descripcion TEXT,
-    modo VARCHAR(50) CHECK (modo IN ('privada', 'publica'))  -- Restricción para asegurarme de introducir estos valores
+    modo VARCHAR(50) CHECK (modo IN ('PRIVADA', 'PUBLICA'))  -- Restricción para asegurarme de introducir estos valores
 );
 
 --  Tabla de roles
 CREATE TABLE rol (
     id BIGSERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL  CHECK (nombre IN ('administrador', 'invitado', 'propietario')) 
+    nombre VARCHAR(50) NOT NULL  CHECK (nombre IN ('ADMINISTRADOR', 'INVITADO', 'PROPIETARIO')) 
 );
 
 -- Tabla de miembros del plan

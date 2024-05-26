@@ -84,5 +84,19 @@ public class CustomerController {
         }
 	 }
 	
+	 @GetMapping("by-list")
+	 public ResponseEntity<List<CustomerDTOresumen>> getCustomersByList(@RequestBody List<String> referencias){
+		 
+		 final List<Customer> customers = this.customerService.getAllByReferencia(referencias);
+		 if(!customers.isEmpty()) {
+			 
+			 List<CustomerDTOresumen> customerDTOresumens = customers.stream()
+					 										.map(customer -> this.customerMapper.toDTOresumen(customer))
+					 										.collect(Collectors.toList());
+			return ResponseEntity.ok(customerDTOresumens); 
+		 }
+		 
+		 return ResponseEntity.notFound().build();
+	 }
 	
 }

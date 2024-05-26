@@ -40,6 +40,9 @@ public class Plan {
     @Column( unique = true, nullable = false, updatable = false, length = 150)
     private String referencia;
     
+    @Column( nullable = false, updatable = false, length = 150)
+    private String titulo;
+    
     @CreationTimestamp
     @Column(name = "fecha_creacion", nullable = false, updatable = false)
     private LocalDateTime fechaCreacion;

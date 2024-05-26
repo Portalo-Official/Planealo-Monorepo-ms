@@ -11,6 +11,6 @@ public interface ICustomerService<T, Ref> extends IService<T, Ref>{
 	 */
 	public List<T> getByRefContaing(Ref ref);
 
-	
+	public List<T> getAllByReferencia(List<Ref> ref);
 	
 }

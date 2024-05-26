@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -82,4 +83,17 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 		return customers.orElse(Collections.emptyList());
 	}
 
+	@Override
+	public List<Customer> getAllByReferencia(List<String> ref) {
+		
+		List<Customer> customers = ref.stream()
+									  .map(r -> this.customerRepo.findByReferencia(r).orElse(null))
+									  .filter(customer -> customer != null)
+									  .collect(Collectors.toList());
+		
+		
+		return customers;
+	}
+	
+	
 }
