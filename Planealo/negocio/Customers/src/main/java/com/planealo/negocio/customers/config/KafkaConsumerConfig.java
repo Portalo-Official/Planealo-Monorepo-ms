@@ -8,9 +8,11 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.config.KafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
 
 @Configuration
@@ -19,10 +21,9 @@ public class KafkaConsumerConfig {
 	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServers;
 	/*
-	 * El mensaje debe tener una clave y un valor.
-	 * Clave: Tipo String
-	 * Valor: Puede ser cualquier objeto, pero como acabara 
-	 * 		en otro microservicio es más  versatil poner Object.
+	 * Configurar las propiedades del LEctor (consumidor)
+	 * - Conectar al servidor Kafka
+	 * - Deserializar clave y valor del mensaje
 	 */
 	public Map<String, Object> consumerConfig(){
 		
@@ -39,18 +40,36 @@ public class KafkaConsumerConfig {
 	}
 	
 	/*
-	 * Crear una factoria para crear un proveedor que envia mensajes
+	 * ConsumerFactory -> Utiliza por dentro el patron Factory. 
 	 * 
+	 * Esto no provee de un Objeto Consumer que se va a encargar de
+	 * escuchar los mensajes. 
 	 */
 	@Bean
-	public ProducerFactory<String, String> providerFactory(){
-		return new DefaultKafkaProducerFactory<>(consumerConfig());
+	public ConsumerFactory<String, String> consumerFactory(){
+		return new DefaultKafkaConsumerFactory<>(consumerConfig());
 	}
+	
+	
 	
 	@Bean
-	public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producerFactory){
-		return new KafkaTemplate<>(producerFactory);
+	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> consumer(){
+		
+		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		
+		factory.setConsumerFactory(consumerFactory());
+		
+		return factory;
 	}
 	
+	/* Crear el consumidor:
+	 * 
+	 * KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>>
+	 * 
+	 * ConcurrentMessageListenerContainer<K, V> 
+	 * 			K: Clave del mensaje
+	 * 			V: Valor del mensaje
+	 * 
+	 */
 	
 }
