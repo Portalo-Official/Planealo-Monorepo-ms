@@ -28,10 +28,10 @@ public class PlanMember {
 	
 	// Para claves primarias embebidas 
 	// https://stackoverflow.com/questions/9923643/can-someone-please-explain-me-mapsid-in-hibernate
-	@ManyToOne
-	@MapsId("planReferencia") // Elemento de la clave compuesta PlanMiembroId
-	@JoinColumn(name = "plan_referencia", referencedColumnName = "referencia")
-	private Plan plan;
+//	@ManyToOne
+//	@MapsId("planReferencia") // Elemento de la clave compuesta PlanMiembroId
+//	@JoinColumn(name = "plan_referencia", referencedColumnName = "referencia")
+//	private Plan plan;
 
 	@ManyToOne
 	@JoinColumn(name = "rol_id") 

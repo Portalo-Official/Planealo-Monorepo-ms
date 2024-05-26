@@ -79,7 +79,8 @@ public class Plan {
     //@JoinColumn(name ="plan_id") 
     //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @OneToMany(mappedBy = "plan", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "plan_referencia", referencedColumnName = "referencia")
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PlanMember> miembros;
     
     @PrePersist
