@@ -1,7 +1,7 @@
 package com.planealo.negocio.plan.model.entity;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,7 +22,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Data
 @NoArgsConstructor
@@ -81,7 +80,7 @@ public class Plan {
 //    @OneToMany(mappedBy = "plan", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "plan_referencia", referencedColumnName = "referencia")
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PlanMember> miembros;
+    private List<PlanMember> miembros;
     
     @PrePersist
     protected void prePersist() {

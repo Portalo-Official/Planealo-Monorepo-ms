@@ -84,7 +84,7 @@ public class CustomerController {
         }
 	 }
 	
-	 @GetMapping("by-list")
+	 @PostMapping("by-list")
 	 public ResponseEntity<List<CustomerDTOresumen>> getCustomersByList(@RequestBody List<String> referencias){
 		 
 		 final List<Customer> customers = this.customerService.getAllByReferencia(referencias);
