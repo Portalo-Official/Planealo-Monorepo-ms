@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.planealo.negocio.plan.clients.CustomerClientRest;
 import com.planealo.negocio.plan.model.dto.CustomerDTOresumen;
 import com.planealo.negocio.plan.model.dto.PlanDTOaux;
+import com.planealo.negocio.plan.model.dto.PlanDTOresumen;
 import com.planealo.negocio.plan.model.entity.Plan;
 import com.planealo.negocio.plan.model.entity.PlanMember;
+import com.planealo.negocio.plan.model.mapper.PlanMapper;
 import com.planealo.negocio.plan.service.impl.PlanServiceImpl;
 import com.planealo.negocio.plan.utils.ConstTopics;
 
@@ -24,31 +26,24 @@ import com.planealo.negocio.plan.utils.ConstTopics;
 @RequestMapping("/planes")
 public class PlanController {
 	
-	private final KafkaTemplate<String, String> kafkaTemplate;
 	private final PlanServiceImpl planService;
 	private final CustomerClientRest customerClient;
+	private final PlanMapper planMapper;
 	
-	public PlanController(PlanServiceImpl planService,CustomerClientRest customerClient, KafkaTemplate<String, String> kafkaTemplate) {
+	public PlanController(PlanServiceImpl planService,CustomerClientRest customerClient,PlanMapper planMapper) {
 		super();
 		this.planService= planService;
 		this.customerClient= customerClient;
-		this.kafkaTemplate = kafkaTemplate;
+		this.planMapper= planMapper;
 	}
 
 
 	@GetMapping("")
 	public ResponseEntity<?> getPlan(){
 		
-		String mensaje = "Mensajes:: Todos los planes ";
-		try {
-			this.kafkaTemplate.send(ConstTopics.Topic_Usuario, mensaje);
+		List<PlanDTOresumen> planes = this.planMapper.toDTOresumenList(this.planService.getAll());
 			
-		} catch (Exception e) {
-			
-			return ResponseEntity.ok("Veamos....".concat(e.getMessage()));
-		}
-		
-		return ResponseEntity.ok("Veamos....");
+		return ResponseEntity.ok(planes);
 	}
 	
 	@GetMapping("/{referencia}")

@@ -46,8 +46,8 @@ public class CustomerController {
 	public ResponseEntity<?> findByReferencia(@PathVariable String ref){
 		
 //		this.customerService.
-		
-		return null;
+		CustomerDTOperfil customer = this.customerMapper.toDTOperfil( this.customerService.getByRef(ref));
+		return ResponseEntity.ok(customer);
 	}
 	
 	 @PutMapping()

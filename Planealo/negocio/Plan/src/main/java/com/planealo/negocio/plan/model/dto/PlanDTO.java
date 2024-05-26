@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record PlanDTO(String referencia,
+					String titulo,
 					LocalDateTime fechaCreacion,
 					LocalDateTime fechaFin,
 					Double ubicacionLatitud,
