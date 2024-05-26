@@ -25,25 +25,25 @@ public class KafkaTopicConfig {
 	 * Estos parametros sirver para manejar la carga de trabajo de manera eficiente
 	 *  y asegurar la disponibilidad de los datos.
 	 */
-	@Bean
-	public NewTopic generateTopi() {
-		
-		Map<String, String> configuracion = new HashMap<>();
-		// 1) Tratamiento de borrado de los mensajes
-		configuracion.put(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_DELETE);
-		// 2) Tiempo de retencion de mensajes
-		configuracion.put(TopicConfig.RETENTION_MS_CONFIG, ConstTopics.DIA_MILISEGUNDOS);
-		// 3) Tamanio Max del Segmento dentro del topic
-		configuracion.put(TopicConfig.SEGMENT_BYTES_CONFIG, ConstTopics.CUARTO_GB);
-		// 4) Tamanio Max de cada mensaje
-		configuracion.put(TopicConfig.MAX_MESSAGE_BYTES_CONFIG, ConstTopics.TRES_MB);
-		
-		return TopicBuilder.name(ConstTopics.Topic_Planes)
-					.partitions(2) // Num particiones
-					.replicas(2) // Num replicas
-					.configs(configuracion)
-					.build();
-	}
+//	@Bean
+//	public NewTopic generateTopi() {
+//		
+//		Map<String, String> configuracion = new HashMap<>();
+//		// 1) Tratamiento de borrado de los mensajes
+//		configuracion.put(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_DELETE);
+//		// 2) Tiempo de retencion de mensajes
+//		configuracion.put(TopicConfig.RETENTION_MS_CONFIG, ConstTopics.DIA_MILISEGUNDOS);
+//		// 3) Tamanio Max del Segmento dentro del topic
+//		configuracion.put(TopicConfig.SEGMENT_BYTES_CONFIG, ConstTopics.CUARTO_GB);
+//		// 4) Tamanio Max de cada mensaje
+//		configuracion.put(TopicConfig.MAX_MESSAGE_BYTES_CONFIG, ConstTopics.TRES_MB);
+//		
+//		return TopicBuilder.name(ConstTopics.Topic_Planes)
+//					.partitions(1) // Num particiones
+//					.replicas(1) // Num replicas
+//					.configs(configuracion)
+//					.build();
+//	}
 	
 	/* 
 	 * 1) Tratamiento de borrado de los mensajes
