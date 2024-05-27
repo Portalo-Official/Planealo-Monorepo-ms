@@ -30,8 +30,9 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 	}
 
 	@Override
-	public Boolean delete(Customer customerDelete) {
-		Optional<Customer> customer = this.customerRepo.findByReferencia(customerDelete.getReferencia());
+	public Boolean delete(Customer customerDelete, String referencia) {
+		Optional<Customer> customer = this.customerRepo.findByReferencia(referencia);
+		
 		if (customer.isPresent()) {
 			if (customer.get().getPassword().equals(customerDelete.getPassword())) { // Puede que se tenga que desencriptar
 				this.customerRepo.delete(customer.get());
@@ -61,8 +62,8 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 	@Override
 	// @Transactional ->
 	// https://danielme.com/2023/02/22/curso-spring-data-jpa-transacciones-propagacion-excepciones/
-	public Customer editUser( Customer t) {
-		Optional<Customer> existingCustomer = this.customerRepo.findByReferencia(t.getReferencia());
+	public Customer editUser( Customer t, String referencia) {
+		Optional<Customer> existingCustomer = this.customerRepo.findByReferencia(referencia);
 		if (existingCustomer.isPresent()) {
 			// Verifica que el correo no exista
 			if (this.customerRepo.findByEmail(t.getEmail()).isEmpty()) {

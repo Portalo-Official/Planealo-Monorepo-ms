@@ -6,7 +6,7 @@ public interface IService<T, Ref> {
 
 	public T add(T t);
 	
-	public Boolean delete(T t);
+	public Boolean delete(T t, Ref ref);
 	
 	public T getByRef(Ref ref);
 	
@@ -14,7 +14,7 @@ public interface IService<T, Ref> {
 	
 	public Boolean addAll(List<T> t);
 	
-	public T editUser( T t);
+	public T editUser( T t, Ref ref);
 	
 	
 }
