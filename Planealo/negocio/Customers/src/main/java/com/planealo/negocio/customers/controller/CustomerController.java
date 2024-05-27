@@ -42,17 +42,17 @@ public class CustomerController {
 													.collect(Collectors.toList()));
 	}
 	
-	@GetMapping("/{ref}")
-	public ResponseEntity<?> findByReferencia(@PathVariable String ref){
+	@GetMapping("/{referencia}")
+	public ResponseEntity<?> findByReferencia(@PathVariable String referencia){
 		
 //		this.customerService.
-		CustomerDTOperfil customer = this.customerMapper.toDTOperfil( this.customerService.getByRef(ref));
+		CustomerDTOperfil customer = this.customerMapper.toDTOperfil( this.customerService.getByRef(referencia));
 		return ResponseEntity.ok(customer);
 	}
 	
-	 @PutMapping()
-    public ResponseEntity<CustomerDTOperfil> updateCustomer( @RequestBody CustomerDTOperfil customerUpdate) {
-        Customer customer = customerService.editUser( this.customerMapper.perfilToCustomer(customerUpdate));
+	 @PutMapping("create/{referencia}")
+    public ResponseEntity<CustomerDTOperfil> updateCustomer(@PathVariable String referencia, @RequestBody CustomerDTOperfil customerUpdate) {
+        Customer customer = customerService.editUser( this.customerMapper.perfilToCustomer(customerUpdate), referencia);
         if (customer != null) {
             return ResponseEntity.ok(this.customerMapper.toDTOperfil(customer));
         } else {
@@ -61,20 +61,24 @@ public class CustomerController {
     }
 	 @PostMapping("new")
 	 public ResponseEntity<?> createCustomer(@RequestBody CustomerDTOperfil customerUpdate) {
-		 Customer customer = customerService.add( this.customerMapper.perfilToCustomer(customerUpdate));
-		 if (customer != null) {
-			 return ResponseEntity.ok()
-					 .header("New Customer", HttpHeaders.ACCEPT)
-					 .body(this.customerMapper.toDTOperfil(customer));
-		 } else {
-			 return ResponseEntity.badRequest()
-					 .body("Campos invalidados"); //TODO Hardcodeo
-		 }
+		if(customerUpdate!=null) {
+			 Customer customer = this.customerService.add( this.customerMapper.perfilToCustomer(customerUpdate));
+			 if (customer != null) {
+				 return ResponseEntity.ok()
+						 .header("New Customer", HttpHeaders.ACCEPT)
+						 .body(this.customerMapper.toDTOperfil(customer));
+			 } else {
+				 return ResponseEntity.badRequest()
+						 .body("Campos invalidados"); //TODO Hardcodeo
+			 }
+		}
+		 return ResponseEntity.badRequest()
+				 .body("Body Request null"); //TODO Hardcodeo
 	 }
 	 
-	 @DeleteMapping()
-	 public ResponseEntity<?> delete(@RequestBody CustomerDTOperfil customerDelete){
-		 Boolean isDelete = customerService.delete( this.customerMapper.perfilToCustomer(customerDelete));
+	 @DeleteMapping("/delete/{referencia}")
+	 public ResponseEntity<?> delete(@PathVariable String referencia, @RequestBody CustomerDTOperfil customerDelete){
+		 Boolean isDelete = customerService.delete( this.customerMapper.perfilToCustomer(customerDelete), referencia);
         if (isDelete) {
             return ResponseEntity.ok(customerDelete);
         } else {
