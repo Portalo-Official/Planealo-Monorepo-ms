@@ -10,12 +10,12 @@ import com.planealo.negocio.customers.utils.ConstTopics;
 @Configuration
 public class KafkaConsumerListener {
 
-	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-	
-	@KafkaListener(topics = {ConstTopics.Topic_Usuario}, groupId = "group-get-users")
-	public void listenerPlanes(String mensaje) {
-		LOGGER.info("Mensaje Recibido: "+ mensaje);
-	}
+//	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+//	
+//	@KafkaListener(topics = {ConstTopics.Topic_Usuario}, groupId = "group-get-users")
+//	public void listenerPlanes(String mensaje) {
+//		LOGGER.info("Mensaje Recibido: "+ mensaje);
+//	}
 	
 	/*
 	 * Kafkalistener

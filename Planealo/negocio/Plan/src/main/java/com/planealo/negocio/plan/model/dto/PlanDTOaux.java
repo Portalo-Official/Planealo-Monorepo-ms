@@ -34,4 +34,16 @@ public class PlanDTOaux {
 						  plan.getModo().toString(),
 						  customers);
 	}
+	
+//	public static Plan toPlan(Plan plan, List<CustomerDTOresumen> customers) {
+//		return new PlanDTOaux(plan.getReferencia(),
+//				plan.getTitulo(),
+//				plan.getFechaCreacion(),
+//				plan.getFechaFin(),
+//				plan.getUbicacionLatitud(),
+//				plan.getUbicacionAltitud(),
+//				plan.getDescripcion(),
+//				plan.getModo().toString(),
+//				customers);
+//	}
 }

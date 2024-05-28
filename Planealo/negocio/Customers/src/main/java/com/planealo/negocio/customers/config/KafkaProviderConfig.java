@@ -1,4 +1,4 @@
-package com.planealo.negocio.plan.config;
+package com.planealo.negocio.customers.config;
 
 import java.util.HashMap;
 import java.util.Map;

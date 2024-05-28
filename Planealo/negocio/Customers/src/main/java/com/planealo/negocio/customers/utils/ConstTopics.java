@@ -4,6 +4,8 @@ public class ConstTopics {
 	
 	public static final String Topic_Usuario    = "usuario-obtener";
 	
+	public static final String Topic_Borrar_Usuario = "delete-user";
+	
 	public static final String Topic_Planes     = "planes";
 	
 	public static final String DIA_MILISEGUNDOS = "86400000";

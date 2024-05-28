@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.planealo.negocio.customers.models.dto.CustomerDTOresumen;
 import com.planealo.negocio.customers.models.entity.Customer;
 import com.planealo.negocio.customers.models.mapper.CustomerMapper;
 import com.planealo.negocio.customers.service.impl.CustomerServiceImpl;
+import com.planealo.negocio.customers.utils.ConstTopics;
 
 @RestController
 @RequestMapping("customers")
@@ -26,11 +28,13 @@ public class CustomerController {
 
 	private final CustomerServiceImpl customerService;
 	private final CustomerMapper customerMapper;
+	private final KafkaTemplate<String, String> kafkaTemplate;
 	
-	public CustomerController(CustomerServiceImpl customerService, CustomerMapper customerMapper) {
+	public CustomerController(CustomerServiceImpl customerService, CustomerMapper customerMapper, KafkaTemplate<String, String> kafkaTemplate) {
 		super();
 		this.customerService = customerService;
 		this.customerMapper= customerMapper;
+		this.kafkaTemplate= kafkaTemplate;
 	}
 
 	@GetMapping("all")
@@ -80,6 +84,9 @@ public class CustomerController {
 	 public ResponseEntity<?> delete(@PathVariable String referencia, @RequestBody CustomerDTOperfil customerDelete){
 		 Boolean isDelete = customerService.delete( this.customerMapper.perfilToCustomer(customerDelete), referencia);
         if (isDelete) {
+        	
+        	this.kafkaTemplate.send(ConstTopics.Topic_Borrar_Usuario, referencia );
+        	
             return ResponseEntity.ok(customerDelete);
         } else {
             return ResponseEntity.badRequest()

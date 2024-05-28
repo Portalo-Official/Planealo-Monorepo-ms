@@ -36,7 +36,7 @@ public class KafkaTopicConfig {
 		// 4) Tamanio Max de cada mensaje
 		configuracion.put(TopicConfig.MAX_MESSAGE_BYTES_CONFIG, ConstTopics.TRES_MB);
 		
-		return TopicBuilder.name(ConstTopics.Topic_Usuario)
+		return TopicBuilder.name(ConstTopics.Topic_Borrar_Usuario)
 					.partitions(1) // Num particiones
 					.replicas(1) // Num replicas
 					.configs(configuracion)

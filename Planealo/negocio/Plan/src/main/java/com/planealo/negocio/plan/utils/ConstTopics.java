@@ -3,6 +3,8 @@ package com.planealo.negocio.plan.utils;
 public class ConstTopics {
 	
 	public static final String Topic_Usuario     = "usuario-obtener";
+
+	public static final String Topic_Borrar_Usuario = "delete-user";
 	
 	public static final String Topic_Planes     = "planes";
 	
@@ -21,5 +23,6 @@ public class ConstTopics {
 	public static final String TRES_MB          = "3145728";
 	
 	public static final String CINCO_MB         = "5242880";
+
 	
 }
