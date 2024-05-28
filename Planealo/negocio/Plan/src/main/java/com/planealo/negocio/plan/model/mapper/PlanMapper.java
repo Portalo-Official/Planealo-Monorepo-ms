@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import com.planealo.negocio.plan.model.dto.MemberDTO;
 import com.planealo.negocio.plan.model.dto.PlanDTO;
 import com.planealo.negocio.plan.model.dto.PlanDTOresumen;
 import com.planealo.negocio.plan.model.entity.Plan;
@@ -17,6 +18,10 @@ public interface PlanMapper {
 	@Mapping(target= "id", ignore = true)
 	@Mapping(target= "miembros", ignore = true)
 	Plan DTOtoPlan(PlanDTO plan);
+	
+	@InheritInverseConfiguration
+	@Mapping(target="miembros", source="members")
+	PlanDTO ToDto(Plan plan, List<MemberDTO> members);
 	
 	
 	
@@ -32,4 +37,6 @@ public interface PlanMapper {
 	PlanDTOresumen toDTOresumen(Plan plan);
 	
 	List<PlanDTOresumen> toDTOresumenList(List<Plan> planes);
+	
+	
 }

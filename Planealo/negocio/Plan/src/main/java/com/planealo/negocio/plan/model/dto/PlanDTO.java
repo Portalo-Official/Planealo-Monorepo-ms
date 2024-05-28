@@ -10,6 +10,7 @@ public record PlanDTO(String referencia,
 					Double ubicacionLatitud,
 					Double ubicacionAltitud,
 					String descripcion,
-					String modo) {
+					String modo,
+					List<MemberDTO> miembros) {
 
 }
