@@ -74,7 +74,6 @@ public class PlanController {
 														.stream()
 														.collect(Collectors.toMap((CustomerDTOresumen::ref), customer -> customer));
 			
-			
 			List<MemberDTO> miembros = MapperToListMemberDTO(plan, usuarios);
 			
 			return ResponseEntity.ok(this.planMapper.ToDto(plan, miembros));
