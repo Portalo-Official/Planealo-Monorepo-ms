@@ -1,5 +1,6 @@
 package com.planealo.negocio.plan.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,9 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
 	
 	@Query("SELECT p FROM Plan p WHERE p.referencia = :referencia")
     Optional<Plan> getByReferencia(@Param("referencia") String referencia);
+	
+
+	@Query("SELECT p FROM Plan p WHERE p.referencia IN :referencias")
+    List<Plan> findAllByReferencia(@Param("referencias") List<String> referencias);
 	
 }
