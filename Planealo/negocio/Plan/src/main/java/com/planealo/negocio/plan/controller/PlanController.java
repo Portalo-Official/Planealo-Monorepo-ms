@@ -81,7 +81,29 @@ public class PlanController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
+	
+	/**
+	 * Retorna todos los planes que esta asociado a un usuario.
+	 * @param referenciaUsuario
+	 * @return
+	 */
+	@GetMapping("user/{referenciaUsuario}")
+	public ResponseEntity<?> getPlanByUsuario(@PathVariable String referenciaUsuario){
+		
+		List<String> referenciaPlanes= this.planMemberService.getByUsuarioRef(referenciaUsuario)
+																						.stream()
+																						.map(miembro-> miembro.getId().getPlanReferencia())
+																						.collect(Collectors.toList());
+		
+		List<Plan> planes =  this.planService.getAllByRef(referenciaPlanes);
+		
+		if(planes.isEmpty()) {
+			
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(this.planMapper.toDTOresumenList(planes));
+	}
 
 	private List<MemberDTO> MapperToListMemberDTO(Plan plan, Map<String, CustomerDTOresumen> usuarios) {
 		return plan.getMiembros().stream()
