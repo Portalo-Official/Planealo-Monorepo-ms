@@ -1,11 +1,15 @@
 package com.planealo.negocio.plan.listener;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
 
+import com.planealo.negocio.plan.model.entity.PlanMember;
+import com.planealo.negocio.plan.model.entity.Rol;
 import com.planealo.negocio.plan.service.impl.PlanMemberServiceImpl;
 import com.planealo.negocio.plan.service.impl.PlanServiceImpl;
 import com.planealo.negocio.plan.utils.ConstTopics;
@@ -22,6 +26,15 @@ public class KafkaConsumerListener {
 	@KafkaListener(topics = {ConstTopics.Topic_Borrar_Usuario}, groupId = "group-get-users")
 	public void listenerPlanes(String referenciaUsuario) {
 		
+		List<PlanMember> miembros = this.planMemberServiceImpl.getByUsuarioRef(referenciaUsuario);
+			
+		miembros.forEach(miembro ->{
+			if(miembro.getRol().equals(Rol.RolNombre.PROPIETARIO)) {
+				this.planServiceImpl.deletePlan(referenciaUsuario);
+			}else {
+				this.planMemberServiceImpl.delete(miembro.getId());
+			}
+		});
 		
 		LOGGER.info("Usuario: "+ referenciaUsuario+" borrado de todos los Planes");
 	}
