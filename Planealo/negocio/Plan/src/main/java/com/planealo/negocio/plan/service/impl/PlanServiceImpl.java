@@ -1,6 +1,7 @@
 package com.planealo.negocio.plan.service.impl;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +88,11 @@ public class PlanServiceImpl implements IPlanService<Plan, String>{
 			return planOpt.get();
 		}
 		return null;
+	}
+
+	@Override
+	public List<Plan> getAllByRef(List<String> refs) {		
+		return this.planRepository.findAllByReferencia(refs);
 	}
 	
 	
