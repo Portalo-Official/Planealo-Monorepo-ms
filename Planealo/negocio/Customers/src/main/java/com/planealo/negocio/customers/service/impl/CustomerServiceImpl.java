@@ -103,9 +103,9 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
  
 	@Override
 	public Customer login(Customer t) {
-		this.LOGGER.info("Antes de Buscar: "+t.toString());
+//		this.LOGGER.info("Antes de Buscar: "+t.toString());
 		Optional<Customer> customer = this.customerRepo.findByEmail(t.getEmail().toLowerCase());
-		this.LOGGER.info(customer.toString());
+//		this.LOGGER.info(customer.toString());
 		if(customer.isPresent() && customer.get().getPassword().equals(t.getPassword())) {
 			return customer.get();
 		}
