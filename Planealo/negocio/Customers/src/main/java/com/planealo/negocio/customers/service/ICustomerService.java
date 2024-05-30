@@ -13,4 +13,5 @@ public interface ICustomerService<T, Ref> extends IService<T, Ref>{
 
 	public List<T> getAllByReferencia(List<Ref> ref);
 	
+	public T login(T t);
 }
