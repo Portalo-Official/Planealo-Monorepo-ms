@@ -95,6 +95,17 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 		
 		return customers;
 	}
+
+	@Override
+	public Customer login(Customer t) {
+		Optional<Customer> customer = this.customerRepo.findByEmail(t.getEmail());
+		
+		if(customer.isPresent() && customer.get().getPassword().equals(t.getPassword())) {
+			return customer.get();
+		}
+		
+		return null;
+	}
 	
 	
 }
