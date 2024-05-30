@@ -51,7 +51,6 @@ public interface CustomerMapper {
 	@Mapping(target = "id", ignore = true) 
 	@Mapping(target = "nombre", ignore = true) 
 	@Mapping(source = "pass", target = "password") 
-	@Mapping(target = "email", ignore = true) 
 	@Mapping(target = "referencia", ignore = true)
 	@Mapping(target = "fechaCreacion", ignore = true)
 	@Mapping(target = "fechaUltimaActualizacion", ignore = true)
