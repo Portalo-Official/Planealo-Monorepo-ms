@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.planealo.negocio.customers.models.entity.Customer;
@@ -13,11 +15,13 @@ import com.planealo.negocio.customers.repository.CustomerRepository;
 import com.planealo.negocio.customers.service.ICustomerService;
 import com.planealo.negocio.customers.utils.Utiles;
 
+
 @Service
 public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 
 	private final CustomerRepository customerRepo;
-
+	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	
 	public CustomerServiceImpl(CustomerRepository customerRepo) {
 		super();
 		this.customerRepo = customerRepo;
@@ -26,6 +30,7 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 	@Override
 	public Customer add(Customer t) {
 		t.setReferencia(Utiles.generateReferencia());
+		t.setEmail(t.getEmail().toLowerCase());
 		return this.customerRepo.save(t);
 	}
 
@@ -95,11 +100,12 @@ public class CustomerServiceImpl implements ICustomerService<Customer, String> {
 		
 		return customers;
 	}
-
+ 
 	@Override
 	public Customer login(Customer t) {
-		Optional<Customer> customer = this.customerRepo.findByEmail(t.getEmail());
-		
+		this.LOGGER.info("Antes de Buscar: "+t.toString());
+		Optional<Customer> customer = this.customerRepo.findByEmail(t.getEmail().toLowerCase());
+		this.LOGGER.info(customer.toString());
 		if(customer.isPresent() && customer.get().getPassword().equals(t.getPassword())) {
 			return customer.get();
 		}
