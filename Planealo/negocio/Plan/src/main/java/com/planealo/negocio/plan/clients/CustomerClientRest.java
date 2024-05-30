@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.planealo.negocio.plan.model.dto.CustomerDTOresumen;
 
-@FeignClient(name = "customer.ms", url = "localhost:4001")
+@FeignClient(name = "customer-ms", url = "localhost:4001")
 public interface CustomerClientRest {
 	
 	@PostMapping("/customers/by-list")
