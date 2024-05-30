@@ -36,5 +36,6 @@
 
 	<modules>
 		<module>ConfigServer</module>
+		<module>Eureka</module>
 	</modules>
 </project>
