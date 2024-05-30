@@ -83,12 +83,12 @@ public class CustomerController {
 				 .body("Body Request null"); //TODO Hardcodeo
 	 }
 	 
-	 @GetMapping("login")
+	 @PostMapping("login")
 	 public ResponseEntity<?> login(@RequestBody CustomerDTOlogin customerLogin) {
 		 
 		Customer customer = this.customerService.login(this.customerMapper.loginToCustomer(customerLogin));
 		if (customer!= null) {
-			return ResponseEntity.ok(customer);
+			return ResponseEntity.ok(this.customerMapper.toDTOperfil(customer));
 		}
 		 
 	 	return ResponseEntity.notFound().build();
