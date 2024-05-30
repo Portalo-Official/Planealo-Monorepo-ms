@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.planealo.negocio.customers.models.dto.CustomerDTOlogin;
 import com.planealo.negocio.customers.models.dto.CustomerDTOperfil;
 import com.planealo.negocio.customers.models.dto.CustomerDTOresumen;
 import com.planealo.negocio.customers.models.entity.Customer;
 import com.planealo.negocio.customers.models.mapper.CustomerMapper;
 import com.planealo.negocio.customers.service.impl.CustomerServiceImpl;
 import com.planealo.negocio.customers.utils.ConstTopics;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("customers")
@@ -79,6 +82,18 @@ public class CustomerController {
 		 return ResponseEntity.badRequest()
 				 .body("Body Request null"); //TODO Hardcodeo
 	 }
+	 
+	 @GetMapping("login")
+	 public ResponseEntity<?> login(@RequestBody CustomerDTOlogin customerLogin) {
+		 
+		Customer customer = this.customerService.login(this.customerMapper.loginToCustomer(customerLogin));
+		if (customer!= null) {
+			return ResponseEntity.ok(customer);
+		}
+		 
+	 	return ResponseEntity.notFound().build();
+	 }
+	 
 	 
 	 @DeleteMapping("/delete/{referencia}")
 	 public ResponseEntity<?> delete(@PathVariable String referencia, @RequestBody CustomerDTOperfil customerDelete){
