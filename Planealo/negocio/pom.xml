@@ -19,6 +19,7 @@
 		<java.version>17</java.version>
 		<site.version>3.12.1</site.version>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<springdoc.version>2.5.0</springdoc.version>
 	</properties>
 
 
@@ -40,7 +41,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<!-- <version>${lombok.version}</version> -->
 			<scope>provided</scope>
 		</dependency>
 		<!-- FEIGN  -->
@@ -73,7 +73,14 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-	</dependencies>
+		
+		<!-- SWAGGER -->
+	<!-- 	<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency> -->
+	</dependencies> 
 
 	<build>
 		<pluginManagement>
