@@ -37,5 +37,6 @@
 	<modules>
 		<module>ConfigServer</module>
 		<module>Eureka</module>
+		<module>Gateway</module>
 	</modules>
 </project>
