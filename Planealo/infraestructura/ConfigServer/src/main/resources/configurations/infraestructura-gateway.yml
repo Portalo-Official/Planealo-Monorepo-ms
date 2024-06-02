@@ -19,14 +19,20 @@ spring:
       routes:
       - id: costumer-ms
         uri: http://localhost:4001
+        filters:
+        - RewritePath=/planealo/api/v1/(?<segment>.*), /$\{segment}
         predicates:
         - Path=/customers/**
       - id: plan-ms
         uri: http://localhost:4002
         predicates:
         - Path=/planes/**
+        filters:
+        - RewritePath=/planealo/api/v1/(?<segment>.*), /$\{segment}
       - id: plan-ms-miembros
         uri: http://localhost:4002
         predicates:
         - Path=/miembros/**
+        filters:
+        - RewritePath=/planealo/api/v1/(?<segment>.*), /$\{segment}
 

@@ -6,6 +6,7 @@
     <version>0.0.1</version>
   </parent>
   <artifactId>Gateway</artifactId>
+  <url>planealo/api/vi</url>
   <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
