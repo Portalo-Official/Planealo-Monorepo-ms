@@ -69,10 +69,10 @@
 
 
 		<!-- EUREKA Client-->
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<!-- SWAGGER -->
 	<!-- 	<dependency>
