@@ -1,0 +1,20 @@
+server.port=8080
+spring.application.name=gateway-ms
+spring.cloud.config.enabled=false
+
+## Ejemplo de como seria en -properties
+
+logging.level.[org.springframework.cloud.gateway]=DEBUG
+logging.level.[reactor.netty.http.client]=DEBUG
+
+spring.cloud.gateway.routes[0].id=costumer-ms
+spring.cloud.gateway.routes[0].uri=http://localhost:4001
+spring.cloud.gateway.routes[0].predicates[0]=Path=/customers/**
+
+spring.cloud.gateway.routes[1].id=plan-ms-planes
+spring.cloud.gateway.routes[1].uri=http://localhost:4002
+spring.cloud.gateway.routes[1].predicates[0]=Path=/planes/**
+
+spring.cloud.gateway.routes[2].id=plan-ms-miembros
+spring.cloud.gateway.routes[2].uri=http://localhost:4002
+spring.cloud.gateway.routes[2].predicates[0]=Path=/miembros/**

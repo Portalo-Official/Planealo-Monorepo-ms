@@ -6,4 +6,16 @@
     <version>0.0.1</version>
   </parent>
   <artifactId>Gateway</artifactId>
+  <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<!-- GATEWAY-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+		
+  </dependencies>
 </project>
