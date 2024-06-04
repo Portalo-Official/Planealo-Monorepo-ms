@@ -27,10 +27,11 @@ public class KafkaConsumerListener {
 	public void listenerPlanes(String referenciaUsuario) {
 		
 		List<PlanMember> miembros = this.planMemberServiceImpl.getByUsuarioRef(referenciaUsuario);
-			
+		
+		//ELIMINAR LOS REGISTROS DEL USUARIO
 		miembros.forEach(miembro ->{
-			if(miembro.getRol().equals(Rol.RolNombre.PROPIETARIO)) {
-				this.planServiceImpl.deletePlan(referenciaUsuario);
+			if(miembro.getRol().getNombre().equals(Rol.RolNombre.PROPIETARIO)) {
+				this.planServiceImpl.deletePlan(miembro.getId().getPlanReferencia());
 			}else {
 				this.planMemberServiceImpl.delete(miembro.getId());
 			}
