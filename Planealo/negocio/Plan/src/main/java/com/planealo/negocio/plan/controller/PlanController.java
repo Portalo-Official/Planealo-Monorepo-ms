@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,6 @@ import com.planealo.negocio.plan.clients.CustomerClientRest;
 import com.planealo.negocio.plan.model.dto.CustomerDTOresumen;
 import com.planealo.negocio.plan.model.dto.MemberDTO;
 import com.planealo.negocio.plan.model.dto.PlanDTO;
-import com.planealo.negocio.plan.model.dto.PlanDTOaux;
 import com.planealo.negocio.plan.model.dto.PlanDTOresumen;
 import com.planealo.negocio.plan.model.entity.Plan;
 import com.planealo.negocio.plan.model.mapper.PlanMapper;
@@ -26,6 +26,7 @@ import com.planealo.negocio.plan.model.mapper.PlanMemberMapper;
 import com.planealo.negocio.plan.service.impl.PlanMemberServiceImpl;
 import com.planealo.negocio.plan.service.impl.PlanServiceImpl;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/planes")
 public class PlanController {
@@ -116,9 +117,30 @@ public class PlanController {
 	
 	@PostMapping("new")
 	public ResponseEntity<?> createPlan(@RequestBody PlanDTO planDTO){
-		List<PlanDTOresumen> planes = this.planMapper.toDTOresumenList(this.planService.getAll());
+		Plan plan = this.planMapper.DTOtoPlan(planDTO);
+		plan.setReferencia(null);
 		
-		return ResponseEntity.ok(planes);
+		plan =this.planService.createPlan(plan);
+		
+		if(plan!= null) {
+			
+			return ResponseEntity.ok(this.planMapper.toDTOresumen(plan));
+		}
+		return ResponseEntity.badRequest().body("Problemas al crear el plan");
+	}
+	
+	@PostMapping("new/v2")
+	public ResponseEntity<?> createPlanV2(@RequestBody PlanDTO planDTO){
+		Plan plan = this.planMapper.DTOtoPlan(planDTO);
+		plan.setReferencia(null);
+		
+		plan =this.planService.add(plan);
+		
+		if(plan!= null) {
+			
+		return ResponseEntity.ok(this.planMapper.toDTOresumen(plan));
+		}
+		return ResponseEntity.badRequest().body("Problemas al crear el plan");
 	}
 	
 	 @DeleteMapping("/{referencia}")

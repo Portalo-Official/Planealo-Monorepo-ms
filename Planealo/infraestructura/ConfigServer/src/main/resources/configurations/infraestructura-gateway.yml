@@ -16,6 +16,15 @@ spring:
     config:
       enabled: false
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*" 
+            allowedMethods:
+            - GET
+            - PUT
+            - POST
+            - DELETE
       routes:
       - id: costumer-ms
         uri: http://localhost:4001
@@ -23,16 +32,39 @@ spring:
         - RewritePath=/planealo/api/v1/(?<segment>.*), /$\{segment}
         predicates:
         - Path=/customers/**
+        metadata:
+          cors:
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: '*'
+            maxAge: 30
       - id: plan-ms
         uri: http://localhost:4002
         predicates:
         - Path=/planes/**
         filters:
         - RewritePath=/planealo/api/v1/(?<segment>.*), /$\{segment}
+        metadata:
+          cors:
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: '*'
+            maxAge: 30
       - id: plan-ms-miembros
         uri: http://localhost:4002
         predicates:
         - Path=/miembros/**
         filters:
         - RewritePath=/planealo/api/v1/(?<segment>.*), /$\{segment}
-
+        metadata:
+          cors:
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: '*'
+            maxAge: 30

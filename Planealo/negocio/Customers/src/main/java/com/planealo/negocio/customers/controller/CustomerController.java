@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import com.planealo.negocio.customers.service.impl.CustomerServiceImpl;
 import com.planealo.negocio.customers.utils.ConstTopics;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+@CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
@@ -57,7 +58,7 @@ public class CustomerController {
 		return ResponseEntity.ok(customer);
 	}
 	
-	 @PutMapping("create/{referencia}")
+	 @PutMapping("update/{referencia}")
     public ResponseEntity<CustomerDTOperfil> updateCustomer(@PathVariable String referencia, @RequestBody CustomerDTOperfil customerUpdate) {
         Customer customer = customerService.editUser( this.customerMapper.perfilToCustomer(customerUpdate), referencia);
         if (customer != null) {

@@ -6,18 +6,24 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.planealo.negocio.plan.model.entity.PlanMember;
 import com.planealo.negocio.plan.model.entity.PlanMember.PlanMiembroId;
+import com.planealo.negocio.plan.model.entity.Rol;
 import com.planealo.negocio.plan.repository.PlanMemberRepository;
+import com.planealo.negocio.plan.repository.RolRepository;
 import com.planealo.negocio.plan.service.IPlanMemberService;
 
 @Service
 public class PlanMemberServiceImpl implements IPlanMemberService<PlanMember, PlanMember.PlanMiembroId, String> {
 
 	private final PlanMemberRepository plaMemberRepo;
+	@Autowired
+	private RolRepository rolRepo;
 	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
 	public PlanMemberServiceImpl(PlanMemberRepository plaMemberRepo) {
 		super();
 		this.plaMemberRepo = plaMemberRepo;
@@ -25,8 +31,20 @@ public class PlanMemberServiceImpl implements IPlanMemberService<PlanMember, Pla
 
 	@Override
 	public PlanMember add(PlanMember entity) {
-		return this.plaMemberRepo.save(entity);
+
+		if (!entity.getRol().getNombre().equals(Rol.RolNombre.PROPIETARIO)) {
+			List<Rol> roles = this.rolRepo.findAll();
+			for (Rol rol : roles) {
+				if (rol.getNombre().equals(entity.getRol().getNombre())) {
+					entity.setRol(rol);
+					return this.plaMemberRepo.save(entity);
+				}
+			}
+		}
+		return null;
 	}
+
+	
 
 	@Override
 	public boolean delete(PlanMiembroId id) {
@@ -56,25 +74,27 @@ public class PlanMemberServiceImpl implements IPlanMemberService<PlanMember, Pla
 	public PlanMember getByRef(PlanMiembroId id) {
 		return this.plaMemberRepo.findById(id).orElse(null);
 	}
+
 	@Override
 	public List<PlanMember> getByUsuarioRef(String referenciaUsuario) {
-		
+
 		final Optional<List<PlanMember>> members = this.plaMemberRepo.findByIdUsuarioRef(referenciaUsuario);
 //		members.get().forEach(m ->{
 //			this.LOGGER.info(m.toString());
 //		});
 		return members.orElse(Collections.emptyList());
-		
+
 	}
+
 	@Override
 	public List<PlanMember> getByPlanRef(String referenciaPlan) {
-		
+
 		final Optional<List<PlanMember>> members = this.plaMemberRepo.findByIdPlanReferencia(referenciaPlan);
 //		members.get().forEach(m ->{
 //			this.LOGGER.info(m.toString());
 //		});
 		return members.orElse(Collections.emptyList());
-		
+
 	}
 
 	@Override
@@ -90,12 +110,9 @@ public class PlanMemberServiceImpl implements IPlanMemberService<PlanMember, Pla
 		return null;
 	}
 
-
 	@Override
 	public Boolean deleteAllByPlanRef(String referenciaPlan) {
 		return false;
 	}
-
-	
 
 }
